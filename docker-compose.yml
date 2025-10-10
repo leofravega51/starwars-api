@@ -1,0 +1,45 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: starwars-mongodb
+    restart: always
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_DATABASE: starwars-db
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - starwars-network
+
+  api:
+    build: .
+    container_name: starwars-api
+    restart: always
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongodb
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/starwars-db
+      - PORT=3000
+      - NODE_ENV=development
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRES_IN=${JWT_EXPIRES_IN}
+      - REFRESH_JWT_SECRET=${REFRESH_JWT_SECRET}
+      - REFRESH_JWT_EXPIRES_IN=${REFRESH_JWT_EXPIRES_IN}
+      - API_URL=${API_URL}
+      - WEB_URL=${WEB_URL}
+    volumes:
+      - .:/starwars-api
+      - /starwars-api/node_modules
+    networks:
+      - starwars-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  starwars-network:
+    driver: bridge
+
