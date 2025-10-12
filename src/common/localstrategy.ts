@@ -9,7 +9,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             ignoreExpiration: false,
-            secretOrKey: JWT_SECRET || '',
+            secretOrKey: JWT_SECRET || 'default-secret-key',
         });
     }
 
@@ -17,6 +17,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         if (!payload) {
             throw new UnauthorizedException('Invalid token');
         }
-        return { userId: payload.sub, username: payload.username };
+        return { 
+            userId: payload.sub, 
+            username: payload.username,
+            role: payload.role // Incluir el rol del usuario
+        };
     }
 }

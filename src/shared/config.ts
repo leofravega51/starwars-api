@@ -3,7 +3,7 @@ dotenv.config();
 
 export const {
     MONGODB_URI,
-    API_URL,
+    EXTERNAL_API_URL,
     JWT_SECRET,
     JWT_EXPIRES_IN,
     REFRESH_JWT_SECRET,
