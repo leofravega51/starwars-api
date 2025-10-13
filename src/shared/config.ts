@@ -6,8 +6,6 @@ export const {
     EXTERNAL_API_URL,
     JWT_SECRET,
     JWT_EXPIRES_IN,
-    REFRESH_JWT_SECRET,
-    REFRESH_JWT_EXPIRES_IN,
     NODE_ENV,
     PORT,
     WEB_URL,

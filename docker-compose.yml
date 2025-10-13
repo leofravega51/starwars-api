@@ -25,13 +25,11 @@ services:
     depends_on:
       - mongodb
     environment:
-      - MONGODB_URI=mongodb://mongodb:27017/starwars-db
-      - PORT=3000
-      - NODE_ENV=development
+      - MONGODB_URI=${MONGODB_URI}
+      - PORT=${PORT}
+      - NODE_ENV=${NODE_ENV}
       - JWT_SECRET=${JWT_SECRET}
       - JWT_EXPIRES_IN=${JWT_EXPIRES_IN}
-      - REFRESH_JWT_SECRET=${REFRESH_JWT_SECRET}
-      - REFRESH_JWT_EXPIRES_IN=${REFRESH_JWT_EXPIRES_IN}
       - EXTERNAL_API_URL=${EXTERNAL_API_URL}
       - WEB_URL=${WEB_URL}
     volumes:
@@ -40,6 +38,25 @@ services:
     networks:
       - starwars-network
     command: npm run start:dev
+
+  web:
+    build:
+      context: ../starwars-web
+      dockerfile: Dockerfile.dev
+    container_name: starwars-web
+    restart: always
+    ports:
+      - '5173:5173'
+    depends_on:
+      - api
+    environment:
+      - VITE_API_URL=http://localhost:3000
+      - NODE_ENV=development
+    volumes:
+      - ../starwars-web:/starwars-web
+      - /starwars-web/node_modules
+    networks:
+      - starwars-network
 
 volumes:
   mongodb_data:
