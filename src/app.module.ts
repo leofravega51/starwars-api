@@ -12,7 +12,20 @@ import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(MONGODB_URI || ''),
+    MongooseModule.forRoot(MONGODB_URI || '', {
+      connectionFactory: (connection) => {
+        connection.on('connected', () => {
+          console.log('✅ MongoDB conectado exitosamente');
+        });
+        connection.on('disconnected', () => {
+          console.log('❌ MongoDB desconectado');
+        });
+        connection.on('error', (error) => {
+          console.error('❌ Error de conexión a MongoDB:', error.message);
+        });
+        return connection;
+      },
+    }),
     HttpModule,
     PassportModule,
     JwtModule.register({
