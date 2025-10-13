@@ -26,7 +26,7 @@ describe('StarwarsService', () => {
     vehicles: ['http://swapi.tech/api/vehicles/4'],
     species: ['http://swapi.tech/api/species/1'],
     url: 'http://swapi.tech/api/films/1',
-    description: 'First Star Wars movie',
+    description: 'Primera película de Star Wars',
     uid: '1',
     source: 'api' as const,
     isModified: false,
@@ -53,7 +53,7 @@ describe('StarwarsService', () => {
           species: ['http://swapi.tech/api/species/1'],
           url: 'http://swapi.tech/api/films/1',
         },
-        description: 'First Star Wars movie',
+        description: 'Primera película de Star Wars',
         uid: '1',
       },
     ],
@@ -123,7 +123,7 @@ describe('StarwarsService', () => {
     });
 
     it('should handle API errors', async () => {
-      const error = new Error('API connection failed');
+      const error = new Error('Conexión con API fallida');
       mockHttpService.get.mockReturnValue(throwError(() => error));
 
       await expect(service.getFilmsFromApi()).rejects.toThrow();
@@ -157,7 +157,7 @@ describe('StarwarsService', () => {
     });
 
     it('should handle errors when fetching single film', async () => {
-      const error = new Error('Film not found');
+      const error = new Error('Película no encontrada');
       mockHttpService.get.mockReturnValue(throwError(() => error));
 
       await expect(service.getFilmFromApi('999')).rejects.toThrow();
@@ -207,10 +207,10 @@ describe('StarwarsService', () => {
     });
 
     it('should handle errors during film creation', async () => {
-      const error = new Error('Database error');
+      const error = new Error('Error de base de datos');
       mockFilmModel.create.mockRejectedValue(error);
 
-      await expect(service.createFilm(createFilmData)).rejects.toThrow('Database error');
+      await expect(service.createFilm(createFilmData)).rejects.toThrow('Error de base de datos');
     });
   });
 
@@ -238,12 +238,12 @@ describe('StarwarsService', () => {
     });
 
     it('should handle database errors', async () => {
-      const error = new Error('Database connection failed');
+      const error = new Error('Conexión de base de datos fallida');
       mockFilmModel.find.mockReturnValue({
         exec: jest.fn().mockRejectedValue(error),
       });
 
-      await expect(service.getFilms()).rejects.toThrow('Database connection failed');
+      await expect(service.getFilms()).rejects.toThrow('Conexión de base de datos fallida');
     });
   });
 
@@ -270,7 +270,7 @@ describe('StarwarsService', () => {
     });
 
     it('should handle database errors', async () => {
-      const error = new Error('Database error');
+      const error = new Error('Error de base de datos');
       mockFilmModel.findById.mockReturnValue({
         exec: jest.fn().mockRejectedValue(error),
       });
@@ -331,7 +331,7 @@ describe('StarwarsService', () => {
     });
 
     it('should handle update errors', async () => {
-      const error = new Error('Update failed');
+      const error = new Error('Actualización fallida');
       mockFilmModel.findById.mockResolvedValue(mockFilm);
       mockFilmModel.findByIdAndUpdate.mockReturnValue({
         exec: jest.fn().mockRejectedValue(error),
@@ -364,7 +364,7 @@ describe('StarwarsService', () => {
     });
 
     it('should handle deletion errors', async () => {
-      const error = new Error('Deletion failed');
+      const error = new Error('Eliminación fallida');
       mockFilmModel.findByIdAndDelete.mockReturnValue({
         exec: jest.fn().mockRejectedValue(error),
       });
@@ -458,7 +458,7 @@ describe('StarwarsService', () => {
         .mockResolvedValueOnce(null);
       mockFilmModel.create
         .mockResolvedValueOnce(mockFilm)
-        .mockRejectedValueOnce(new Error('Validation error'));
+        .mockRejectedValueOnce(new Error('Error de validación'));
 
       const result = await service.syncFilmsFromApi();
 
@@ -468,7 +468,7 @@ describe('StarwarsService', () => {
     });
 
     it('should handle API connection errors', async () => {
-      const error = new Error('API not available');
+      const error = new Error('API no disponible');
       mockHttpService.get.mockReturnValue(throwError(() => error));
 
       await expect(service.syncFilmsFromApi()).rejects.toThrow('Error al sincronizar películas');

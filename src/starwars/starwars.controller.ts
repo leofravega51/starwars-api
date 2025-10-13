@@ -217,7 +217,7 @@ export class StarwarsController {
         try {
             const film = await this.starwarsService.getFilm(id);
             if (!film) {
-                res.status(HttpStatus.NOT_FOUND).send({ message: 'Film not found' });
+                res.status(HttpStatus.NOT_FOUND).send({ message: 'Película no encontrada' });
                 return;
             }
             res.status(HttpStatus.OK).send(film);
@@ -266,7 +266,7 @@ export class StarwarsController {
         try {
             const film = await this.starwarsService.updateFilm(id, filmData);
             if (!film) {
-                res.status(HttpStatus.NOT_FOUND).send({ message: 'Film not found' });
+                res.status(HttpStatus.NOT_FOUND).send({ message: 'Película no encontrada' });
                 return;
             }
             res.status(HttpStatus.OK).send(film);
@@ -294,7 +294,7 @@ export class StarwarsController {
         description: 'Película eliminada exitosamente',
         schema: {
             example: {
-                message: 'Film deleted successfully',
+                message: 'Película eliminada exitosamente',
                 film: {
                     _id: '507f1f77bcf86cd799439011',
                     title: 'A New Hope'
@@ -313,10 +313,10 @@ export class StarwarsController {
         try {
             const film = await this.starwarsService.deleteFilm(id);
             if (!film) {
-                res.status(HttpStatus.NOT_FOUND).send({ message: 'Film not found' });
+                res.status(HttpStatus.NOT_FOUND).send({ message: 'Película no encontrada' });
                 return;
             }
-            res.status(HttpStatus.OK).send({ message: 'Film deleted successfully', film });
+            res.status(HttpStatus.OK).send({ message: 'Película eliminada exitosamente', film });
         } catch (error) {
             res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error);
         }

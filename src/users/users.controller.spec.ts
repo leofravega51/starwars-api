@@ -109,7 +109,7 @@ describe('UsersController', () => {
       });
       expect(res.status).toHaveBeenCalledWith(HttpStatus.CREATED);
       expect(res.send).toHaveBeenCalledWith({
-        message: 'User created successfully',
+        message: 'Usuario creado exitosamente',
         user: expect.not.objectContaining({ password: expect.anything() }),
         access_token: token,
       });
@@ -117,7 +117,7 @@ describe('UsersController', () => {
 
     it('should handle errors during user creation', async () => {
       const res = mockResponse();
-      const error = new Error('Database error');
+      const error = new Error('Error de base de datos');
       
       mockUsersService.create.mockRejectedValue(error);
 
@@ -179,7 +179,7 @@ describe('UsersController', () => {
 
     it('should handle errors during login', async () => {
       const res = mockResponse();
-      const error = new Error('Database error');
+      const error = new Error('Error de base de datos');
       
       mockUsersService.validateUser.mockRejectedValue(error);
 
@@ -206,7 +206,7 @@ describe('UsersController', () => {
 
     it('should handle errors when fetching users', async () => {
       const res = mockResponse();
-      const error = new Error('Database error');
+      const error = new Error('Error de base de datos');
       const consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
       
       mockUsersService.findAll.mockRejectedValue(error);
@@ -238,7 +238,7 @@ describe('UsersController', () => {
     it('should handle errors when fetching a user', async () => {
       const res = mockResponse();
       const userId = '507f1f77bcf86cd799439011';
-      const error = new Error('User not found');
+      const error = new Error('Usuario no encontrado');
       
       mockUsersService.findOne.mockRejectedValue(error);
 
@@ -272,7 +272,7 @@ describe('UsersController', () => {
     it('should handle errors during update', async () => {
       const res = mockResponse();
       const userId = '507f1f77bcf86cd799439011';
-      const error = new Error('Update failed');
+      const error = new Error('Actualización fallida');
       
       mockUsersService.update.mockRejectedValue(error);
 
@@ -301,7 +301,7 @@ describe('UsersController', () => {
     it('should handle errors during deletion', async () => {
       const res = mockResponse();
       const userId = '507f1f77bcf86cd799439011';
-      const error = new Error('Delete failed');
+      const error = new Error('Eliminación fallida');
       
       mockUsersService.remove.mockRejectedValue(error);
 

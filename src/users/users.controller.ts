@@ -27,7 +27,7 @@ export class UsersController {
     description: 'Usuario creado exitosamente',
     schema: {
       example: {
-        message: 'User created successfully',
+        message: 'Usuario creado exitosamente',
         user: {
           username: 'johndoe123',
           email: 'john.doe@example.com',
@@ -62,7 +62,7 @@ export class UsersController {
       const { password, ...userWithoutPassword } = user.toObject();
       
       return res.status(HttpStatus.CREATED).send({ 
-        message: 'User created successfully', 
+        message: 'Usuario creado exitosamente', 
         user: userWithoutPassword,
         access_token: token 
       });

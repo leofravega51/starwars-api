@@ -24,7 +24,7 @@ describe('StarwarsController', () => {
     vehicles: ['http://swapi.tech/api/vehicles/4'],
     species: ['http://swapi.tech/api/species/1'],
     url: 'http://swapi.tech/api/films/1',
-    description: 'First Star Wars movie',
+    description: 'Primera película de Star Wars',
     uid: '1',
     source: 'api' as const,
     isModified: false,
@@ -49,7 +49,7 @@ describe('StarwarsController', () => {
         species: [],
         url: 'http://swapi.tech/api/films/1',
       },
-      description: 'First Star Wars movie',
+      description: 'Primera película de Star Wars',
       uid: '1',
     },
   ];
@@ -112,7 +112,7 @@ describe('StarwarsController', () => {
 
     it('should handle errors when fetching films', async () => {
       const res = mockResponse();
-      const error = new Error('Database error');
+      const error = new Error('Error de base de datos');
 
       mockStarwarsService.getFilms.mockRejectedValue(error);
 
@@ -147,7 +147,7 @@ describe('StarwarsController', () => {
 
     it('should handle API connection errors', async () => {
       const res = mockResponse();
-      const error = new Error('API not available');
+      const error = new Error('API no disponible');
 
       mockStarwarsService.getFilmsFromApi.mockRejectedValue(error);
 
@@ -189,7 +189,7 @@ describe('StarwarsController', () => {
 
     it('should handle sync errors', async () => {
       const res = mockResponse();
-      const error = new Error('Sync failed');
+      const error = new Error('Sincronización fallida');
 
       mockStarwarsService.syncFilmsFromApi.mockRejectedValue(error);
 
@@ -251,7 +251,7 @@ describe('StarwarsController', () => {
 
     it('should handle creation errors', async () => {
       const res = mockResponse();
-      const error = new Error('Validation failed');
+      const error = new Error('Validación fallida');
 
       mockStarwarsService.createFilm.mockRejectedValue(error);
 
@@ -285,13 +285,13 @@ describe('StarwarsController', () => {
       await controller.getFilm(filmId, res);
 
       expect(res.status).toHaveBeenCalledWith(HttpStatus.NOT_FOUND);
-      expect(res.send).toHaveBeenCalledWith({ message: 'Film not found' });
+      expect(res.send).toHaveBeenCalledWith({ message: 'Película no encontrada' });
     });
 
     it('should handle errors when fetching film', async () => {
       const res = mockResponse();
       const filmId = '507f1f77bcf86cd799439011';
-      const error = new Error('Database error');
+      const error = new Error('Error de base de datos');
 
       mockStarwarsService.getFilm.mockRejectedValue(error);
 
@@ -331,13 +331,13 @@ describe('StarwarsController', () => {
       await controller.updateFilm(filmId, updateFilmDto, res);
 
       expect(res.status).toHaveBeenCalledWith(HttpStatus.NOT_FOUND);
-      expect(res.send).toHaveBeenCalledWith({ message: 'Film not found' });
+      expect(res.send).toHaveBeenCalledWith({ message: 'Película no encontrada' });
     });
 
     it('should handle update errors', async () => {
       const res = mockResponse();
       const filmId = '507f1f77bcf86cd799439011';
-      const error = new Error('Update failed');
+      const error = new Error('Actualización fallida');
 
       mockStarwarsService.updateFilm.mockRejectedValue(error);
 
@@ -372,7 +372,7 @@ describe('StarwarsController', () => {
       expect(mockStarwarsService.deleteFilm).toHaveBeenCalledWith(filmId);
       expect(res.status).toHaveBeenCalledWith(HttpStatus.OK);
       expect(res.send).toHaveBeenCalledWith({
-        message: 'Film deleted successfully',
+        message: 'Película eliminada exitosamente',
         film: mockFilm,
       });
     });
@@ -386,13 +386,13 @@ describe('StarwarsController', () => {
       await controller.deleteFilm(filmId, res);
 
       expect(res.status).toHaveBeenCalledWith(HttpStatus.NOT_FOUND);
-      expect(res.send).toHaveBeenCalledWith({ message: 'Film not found' });
+      expect(res.send).toHaveBeenCalledWith({ message: 'Película no encontrada' });
     });
 
     it('should handle deletion errors', async () => {
       const res = mockResponse();
       const filmId = '507f1f77bcf86cd799439011';
-      const error = new Error('Deletion failed');
+      const error = new Error('Eliminación fallida');
 
       mockStarwarsService.deleteFilm.mockRejectedValue(error);
 

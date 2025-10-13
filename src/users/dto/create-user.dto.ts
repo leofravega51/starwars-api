@@ -51,7 +51,7 @@ export class CreateUserDTO extends PartialType(LoginDTO) {
     @IsNotEmpty()
     @MinLength(8)
     @MaxLength(30)
-    @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]).{8,}$/, { message: 'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character' })
+    @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]).{8,}$/, { message: 'La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un caracter especial' })
     password: string;
     
     @ApiProperty({
@@ -64,7 +64,7 @@ export class CreateUserDTO extends PartialType(LoginDTO) {
     @IsNotEmpty()
     @MinLength(8)
     @MaxLength(30)
-    @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]).{8,}$/, { message: 'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character' })
+    @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]).{8,}$/, { message: 'La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un caracter especial' })
     confirmPassword: string;
 
     @ApiPropertyOptional({
@@ -73,7 +73,7 @@ export class CreateUserDTO extends PartialType(LoginDTO) {
         default: 'user',
         example: 'user',
     })
-    @IsEnum(['admin', 'user'], { message: 'role must be one of the following values: admin, user' })
+    @IsEnum(['admin', 'user'], { message: 'el rol debe ser uno de los siguientes valores: admin, user' })
     @IsOptional()
     role?: Role;
 }
