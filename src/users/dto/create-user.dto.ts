@@ -1,7 +1,6 @@
 import { PartialType } from "@nestjs/mapped-types";
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { IsEmail, IsEnum, IsNotEmpty, IsOptional, IsString, Matches, MaxLength, MinLength } from "class-validator";
-import { User } from "src/schemas/user.schema";
 import type { Role } from "src/schemas/user.schema";
 import { LoginDTO } from "./login-user.dto";
 

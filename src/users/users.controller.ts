@@ -1,5 +1,5 @@
-import { Controller, Get, Post, Body, Param, Delete, HttpException, HttpStatus, Put, UseGuards, Res } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth, ApiBody } from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Param, Delete, HttpStatus, Put, UseGuards, Res } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { UsersService } from './users.service';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
