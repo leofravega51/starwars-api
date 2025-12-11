@@ -10,7 +10,8 @@ async function bootstrap() {
   
   // Verificar variables de entorno
   console.log('📋 Verificando configuración:');
-  console.log(`   - Puerto: ${PORT || 3000}`);
+  const port = PORT ? parseInt(PORT, 10) : 3000;
+  console.log(`   - Puerto: ${port}`);
   console.log(`   - Entorno: ${NODE_ENV || 'development'}`);
   console.log(`   - MongoDB URI: ${MONGODB_URI ? '✅ Configurado' : '❌ NO configurado'}`);
   
@@ -21,7 +22,9 @@ async function bootstrap() {
 
   console.log('\n🔌 Intentando conectar a MongoDB...\n');
 
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: NODE_ENV === 'production' ? ['error', 'warn'] : ['log', 'error', 'warn', 'debug', 'verbose'],
+  });
 
   app.enableCors()
   app.use(cookieParser());
@@ -52,10 +55,10 @@ async function bootstrap() {
     customSiteTitle: 'Star Wars API Docs'
   });
 
-  await app.listen(PORT || 3000);
+  await app.listen(port, '0.0.0.0');
 
   console.log('\n✨ Servidor iniciado correctamente:');
-  console.log(`   🚀 Server: http://localhost:${PORT || 3000}`);
-  console.log(`   📚 Swagger: http://localhost:${PORT || 3000}/api/docs\n`);
+  console.log(`   🚀 Server: http://0.0.0.0:${port}`);
+  console.log(`   📚 Swagger: http://0.0.0.0:${port}/api/docs\n`);
 }
 bootstrap();
